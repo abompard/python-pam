@@ -75,8 +75,9 @@ class pam():
 
         def conv(pam_self, query_list, user_data):
             response = []
-            for prompt, msg in query_list:
-                if msg == PAM.PAM_PROMPT_ECHO_OFF:
+            for index, query in enumerate(query_list):
+                prompt, msg = query
+                if msg == PAM.PAM_PROMPT_ECHO_OFF and index == 0:
                     response.append((password, PAM.PAM_SUCCESS))
                 else:
                     response.append((b'', PAM.PAM_SUCCESS))
